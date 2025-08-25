@@ -1,19 +1,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
 
-bool VerificaPalindromo(char string[]){
-    int tamanho = 0;
-    while (string[tamanho] != '\0')
-    {
-        tamanho++;
-    }
-    for (int i = 0; i < tamanho / 2; i++)
-    {
-        if (string[i] != string[tamanho - i - 1])
-        {
-            return false;
-        }
+bool VerificaPalindromo(char string[]) {
+    int i = 0, j;
+    while (string[i] != '\0') i++;
+    j = i - 1;
+    int esq = 0, dir = j;
+    while (esq < dir) {
+        while (esq < dir && !isalpha(string[esq])) esq++;
+        while (esq < dir && !isalpha(string[dir])) dir--;
+        if (string[esq] != string[dir]) return false;
+        esq++;
+        dir--;
     }
     return true;
 }
