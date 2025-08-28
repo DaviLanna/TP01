@@ -1,28 +1,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <ctype.h>
+#include <string.h>
 
-bool VerificaPalindromo(char string[]) {
-    int i = 0, j;
-    while (string[i] != '\0') i++;
-    j = i - 1;
-    int esq = 0, dir = j;
-    while (esq < dir) {
-        while (esq < dir && !isalpha(string[esq])) esq++;
-        while (esq < dir && !isalpha(string[dir])) dir--;
-        if (string[esq] != string[dir]) return false;
-        esq++;
-        dir--;
+bool VerificaPalindromoREC(char *string, int inicio, int fim){
+    if(inicio >= fim){
+        return true;
     }
-    return true;
+    if(string[inicio] != string[fim]){
+        return false;
+    }else{
+        return VerificaPalindromoREC(string, inicio + 1, fim - 1);
+    }
 }
 
 int main(){
     char string[100];
     scanf("%s", string);
     while (!(string[0] == 'F' && string[1] == 'I' && string[2] == 'M' && string[3] == '\0')){
-        if (VerificaPalindromo(string) == false)
+        int len = strlen(string);
+        if (VerificaPalindromoREC(string, 0, len - 1) == false)
         {
             printf("NAO\n");
         }

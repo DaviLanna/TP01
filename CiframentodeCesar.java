@@ -3,11 +3,14 @@ import java.util.*;
 public class CiframentodeCesar {
 
     private static StringBuilder Cifra(StringBuilder string){
-        StringBuilder aux = new StringBuilder(string);
+        StringBuilder aux = new StringBuilder();
         for(int i = 0; i < string.length(); i++){
             char c = string.charAt(i);
-            c += 3;
-            aux.setCharAt(i, c);
+            if(c >= 32 && c <= 126){
+                aux.append((char)(c + 3));
+            } else {
+                aux.append(c);
+            }
         }
         return aux;
     }
